@@ -1,8 +1,8 @@
 {
   "name": "cep-hook",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "CEP do Brasil do WebApi Viacep.com.br",
-  "author": "]",
+  "author": "Fulvio Cezar Canducci Dias",
   "license": "MIT",
   "repository": "https://github.com/fulviocanducci/cep-hook.git",
   "main": "dist/index.js",
