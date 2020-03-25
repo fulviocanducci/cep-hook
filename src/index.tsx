@@ -1,5 +1,9 @@
 import * as React from 'react';
 
+export interface status { 
+ erro: boolean;
+}
+
 export interface cep {
   cep: string;
   logradouro: string;
@@ -12,9 +16,9 @@ export interface cep {
   gia: string;
 }
 
-export function useCep(): [string, React.Dispatch<React.SetStateAction<string>>, () => Promise<cep | undefined>] {
+export function useCep(): [string, React.Dispatch<React.SetStateAction<string>>, () => Promise<cep | status |undefined>] {
   const [value, setValue] = React.useState<string>('');
-  const getZip = async(): Promise<cep | undefined> => {
+  const getZip = async(): Promise<cep | status | undefined> => {
     try {
       const response = await fetch(`http://viacep.com.br/ws/${value}/json/`, {mode: 'cors'});
       if (response.ok){

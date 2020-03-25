@@ -10,16 +10,7 @@
 npm install --save cep-hook
 ```
 
-## Usage
- cep: string;
-  logradouro: string;
-  complemento: string;
-  bairro: string;
-  localidade: string;
-  uf: string;
-  unidade: string;
-  ibge: string;
-  gia: string;
+## Usage 
 ```tsx
 import React, { useState } from 'react'
 
@@ -30,10 +21,14 @@ const App = () => {
   const [cep, setCep] = useState(null);
   const handleClickFindCep = async() => {
     try {
-      setCep(await getZip());
+      const c = await getZip();      
+      setCep(c);
     } catch (error) {
       
     }
+  }
+  if (cep && cep.erro) { // error cep invalido
+    return <div>Error</div>
   }
   return (
     <div>
@@ -55,11 +50,5 @@ const App = () => {
 }
 export default App
 ```
-
-## License
-
-MIT © []](https://github.com/])
-
----
 
 This hook is created using [create-react-hook](https://github.com/hermanya/create-react-hook).

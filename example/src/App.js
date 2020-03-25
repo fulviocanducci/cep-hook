@@ -7,10 +7,14 @@ const App = () => {
   const [cep, setCep] = useState(null);
   const handleClickFindCep = async() => {
     try {
-      setCep(await getZip());
+      const c = await getZip();      
+      setCep(c);
     } catch (error) {
       
     }
+  }
+  if (cep && cep.erro) { // error cep invalido
+    return <div>Error</div>
   }
   return (
     <div>
