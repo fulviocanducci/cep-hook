@@ -19,29 +19,25 @@ import { useCep } from 'cep-hook'
 const App = () => {
   const [value, setValue, getZip] = useCep();
   const [cep, setCep] = useState(null);
-  const handleClickFindCep = async() => {
-    try {
-      const c = await getZip();      
-      setCep(c);
-    } catch (error) {
-      
-    }
-  }
-  if (cep && cep.erro) { // error cep invalido
-    return <div>Error</div>
-  }
+
+  const handleClickFindCep = async() => setCep(await getZip());
+
   return (
     <div>
       <div>
-        <p>{cep && cep.cep}</p>
-        <p>{cep && cep.logradouro}</p>
-        <p>{cep && cep.complemento}</p>
-        <p>{cep && cep.bairro}</p>
-        <p>{cep && cep.localidade}</p>
-        <p>{cep && cep.uf}</p>
-        <p>{cep && cep.unidade}</p>
-        <p>{cep && cep.ibge}</p>
-        <p>{cep && cep.gia}</p>
+        <p>Cep: {cep && cep.cep}</p>
+        <p>Logradouro: {cep && cep.logradouro}</p>
+        <p>Complemento: {cep && cep.complemento}</p>
+        <p>Bairro: {cep && cep.bairro}</p>
+        <p>Localidade: {cep && cep.localidade}</p>
+        <p>UF: {cep && cep.uf}</p>
+        <p>Unidade: {cep && cep.unidade}</p>
+        <p>Ibge: {cep && cep.ibge}</p>
+        <p>Gia: {cep && cep.gia}</p>
+        {
+          cep && cep.status && cep.status.erro 
+          && (<pre>Error: {JSON.stringify(cep.status, undefined, 2)}</pre>)
+        }
       </div>
       <input type="text" value={value} onChange={e => setValue(e.target.value)} />
       <button onClick={handleClickFindCep}>Busca de CEP</button>
