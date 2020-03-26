@@ -1,16 +1,27 @@
-import * as React from 'react';
-import { cepErrorInvalid, cepDataOk, cepErrorCatch, cepRequest, cepTestFormatValid, cepErrorFormatInvalid } from './fs';
-import { ICep } from './interfaces';
+import * as React from "react";
+import {
+  cepErrorInvalid,
+  cepDataOk,
+  cepErrorCatch,
+  cepRequest,
+  cepTestFormatValid,
+  cepErrorFormatInvalid
+} from "./fs";
+import { ICep } from "./interfaces";
 
-export function useCep(): [string, React.Dispatch<React.SetStateAction<string>>, () => Promise<ICep>] {
-  const [value, setValue] = React.useState<string>('');
-  const getZip = async(): Promise<ICep> => {
+export function useCep(): [
+  string,
+  React.Dispatch<React.SetStateAction<string>>,
+  () => Promise<ICep>
+] {
+  const [value, setValue] = React.useState<string>("");
+  const getZip = async (): Promise<ICep> => {
     if (cepTestFormatValid(value)) {
       try {
         const response = await cepRequest(value);
-        if (response.ok){
+        if (response.ok) {
           const data = await response.json();
-          if (data.hasOwnProperty('erro')) {
+          if (data.hasOwnProperty("erro")) {
             return cepErrorInvalid();
           } else {
             return cepDataOk(data);
@@ -22,6 +33,6 @@ export function useCep(): [string, React.Dispatch<React.SetStateAction<string>>,
       return cepErrorInvalid();
     }
     return cepErrorFormatInvalid();
-  }
+  };
   return [value, setValue, getZip];
 }
