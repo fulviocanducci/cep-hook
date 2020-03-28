@@ -66,3 +66,29 @@ describe("2 - Hook useCep - Initial value = 01010000", () => {
     });
   });
 });
+
+describe("3 - Hook useCep - Initial value = 00000000 invalid", () => {
+  const { result } = renderHook(() => useCep("00000000"));
+  let value = result.current[0];
+  const setValue = result.current[1];
+  const getZip = result.current[2];
+
+  it("3.1 - Test Cep Initial value 00000000 invalid", () => {
+    expect(value).toBe("00000000");
+    expect(setValue).toBeInstanceOf(Object);
+    expect(getZip).toBeInstanceOf(Object);
+  });
+
+  it("3.2 - Test Method getZip() Return Function cepErrorFormatInvalid()", () => {
+    getZip().then(result => {
+      const fsCep = cepErrorFormatInvalid();
+      console.error(fsCep);
+      expect(result).toBeInstanceOf(Cep);
+      expect(result).toStrictEqual(fsCep);
+      expect(fsCep.status?.erro).toBe(result.status?.erro);
+      expect(fsCep.status?.erro).toStrictEqual(true);
+      expect(fsCep.status?.erroText).toBe(result.status?.erroText);
+      expect(fsCep.status?.erroText).toEqual("Formato inválidosss");
+    });
+  });
+});
