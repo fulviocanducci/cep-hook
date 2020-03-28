@@ -2,7 +2,7 @@
 
 > CEP do Brasil do WebApi Viacep.com.br
 
-[![NPM](https://img.shields.io/npm/v/cep-hook.svg)](https://www.npmjs.com/package/cep-hook) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com) [![npm](https://img.shields.io/npm/dt/cep-hook?style=plastic)](https://www.npmjs.com/package/cep-hook) ![Node.js CI](https://github.com/fulviocanducci/cep-hook/workflows/Node.js%20CI/badge.svg)
+[![NPM](https://img.shields.io/npm/v/cep-hook.svg)](https://www.npmjs.com/package/cep-hook) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com) [![npm](https://img.shields.io/npm/dt/cep-hook?style=plastic)](https://www.npmjs.com/package/cep-hook) [![Node.js CI](https://github.com/fulviocanducci/cep-hook/workflows/Node.js%20CI/badge.svg)](https://www.npmjs.com/package/cep-hook)
 
 ## Install
 
@@ -18,7 +18,8 @@ import React, { useState } from "react";
 import { useCep } from "cep-hook";
 
 const App = () => {
-  const [value, setValue, getZip] = useCep();
+  const initialValue = ""; // Valor inicial ou pode deixar sem valor.
+  const [value, setValue, getZip] = useCep(initialValue);
   const [cep, setCep] = useState(null);
 
   const handleClickFindCep = async () => setCep(await getZip());
