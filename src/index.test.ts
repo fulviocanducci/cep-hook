@@ -1,29 +1,68 @@
-// import { useMyHook } from './'
-// import { renderHook, act } from "@testing-library/react-hooks";
+import { renderHook } from "@testing-library/react-hooks";
 
-// // mock timer using jest
-// jest.useFakeTimers();
+import { useCep } from "./index";
+import { Cep } from "./implementations";
+import { cepErrorFormatInvalid, cepDataOk } from "./fs";
 
-// describe('useMyHook', () => {
-//   it('updates every second', () => {
-//     const { result } = renderHook(() => useMyHook());
+describe("1 - Hook useCep - Empty value", () => {
+  const { result } = renderHook(() => useCep());
+  let value = result.current[0];
+  const setValue = result.current[1];
+  const getZip = result.current[2];
 
-//     expect(result.current).toBe(0);
+  it("1.1 - Test Cep Initial value Empty", () => {
+    expect(value).toBe("");
+    expect(setValue).toBeInstanceOf(Object);
+    expect(getZip).toBeInstanceOf(Object);
+  });
 
-//     // Fast-forward 1sec
-//     act(() => {
-//       jest.advanceTimersByTime(1000);
-//     });
+  it("1.2 - Test Method getZip() Return Function cepErrorFormatInvalid()", () => {
+    getZip().then(result => {
+      const fsCep = cepErrorFormatInvalid();
+      expect(result).toBeInstanceOf(Cep);
+      expect(result).toStrictEqual(fsCep);
+      expect(fsCep.cep).toBe("");
+      expect(fsCep.bairro).toBe("");
+      expect(fsCep.complemento).toBe("");
+      expect(fsCep.gia).toBe("");
+      expect(fsCep.ibge).toBe("");
+      expect(fsCep.localidade).toBe("");
+      expect(fsCep.logradouro).toBe("");
+      expect(fsCep.status?.erro).toBe(result.status?.erro);
+      expect(fsCep.status?.erro).toBe(true);
+      expect(fsCep.uf).toBe("");
+      expect(fsCep.unidade).toBe("");
+    });
+  });
+});
 
-//     // Check after total 1 sec
-//     expect(result.current).toBe(1);
+describe("2 - Hook useCep - Initial value = 01010000", () => {
+  const { result } = renderHook(() => useCep("01010000"));
+  let value = result.current[0];
+  const setValue = result.current[1];
+  const getZip = result.current[2];
 
-//     // Fast-forward 1 more sec
-//     act(() => {
-//       jest.advanceTimersByTime(1000);
-//     });
+  it("2.1 - Test Cep Initial value 01010000", () => {
+    expect(value).toBe("01010000");
+    expect(setValue).toBeInstanceOf(Object);
+    expect(getZip).toBeInstanceOf(Object);
+  });
 
-//     // Check after total 2 sec
-//     expect(result.current).toBe(2);
-//   })
-// })
+  it("2.2 - Test Method getZip() Return Function cepDataOk(result)", () => {
+    getZip().then(result => {
+      const fsCep = cepDataOk(result);
+      expect(result).toBeInstanceOf(Cep);
+      expect(result).toStrictEqual(fsCep);
+      expect(fsCep.cep).toBe(result.cep);
+      expect(fsCep.bairro).toBe(result.bairro);
+      expect(fsCep.complemento).toBe(result.complemento);
+      expect(fsCep.gia).toBe(result.gia);
+      expect(fsCep.ibge).toBe(result.ibge);
+      expect(fsCep.localidade).toBe(result.localidade);
+      expect(fsCep.logradouro).toBe(result.logradouro);
+      expect(fsCep.status).toBe(result.status);
+      expect(fsCep.uf).toBe(result.uf);
+      expect(fsCep.unidade).toBe(result.unidade);
+    });
+  });
+});

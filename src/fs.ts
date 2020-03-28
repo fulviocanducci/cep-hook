@@ -1,6 +1,7 @@
 import { Cep, Status } from "./implementations";
+import { ICep } from "./interfaces";
 
-function cepErrorInvalid(): Cep {
+function cepErrorInvalid(): ICep {
   return new Cep(
     "",
     "",
@@ -19,7 +20,7 @@ function cepErrorInvalid(): Cep {
   );
 }
 
-function cepErrorCatch(e: Error): Cep {
+function cepErrorCatch(e: Error): ICep {
   return new Cep(
     "",
     "",
@@ -34,7 +35,7 @@ function cepErrorCatch(e: Error): Cep {
   );
 }
 
-function cepErrorFormatInvalid(): Cep {
+function cepErrorFormatInvalid(): ICep {
   return new Cep(
     "",
     "",
@@ -49,7 +50,7 @@ function cepErrorFormatInvalid(): Cep {
   );
 }
 
-function cepDataOk(data: any): Cep {
+function cepDataOk(data: any): ICep {
   return new Cep(
     data.cep,
     data.logradouro,

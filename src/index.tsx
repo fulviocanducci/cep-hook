@@ -8,13 +8,13 @@ import {
   cepErrorFormatInvalid
 } from "./fs";
 import { ICep } from "./interfaces";
-
-export function useCep(): [
-  string,
-  React.Dispatch<React.SetStateAction<string>>,
-  () => Promise<ICep>
-] {
-  const [value, setValue] = React.useState<string>("");
+/**
+ * Cep Hook - Busca de CEP do Site: http://www.viacep.com.br
+ */
+export function useCep(
+  initialValue: string = ""
+): [string, React.Dispatch<React.SetStateAction<string>>, () => Promise<ICep>] {
+  const [value, setValue] = React.useState<string>(initialValue);
   const getZip = async (): Promise<ICep> => {
     if (cepTestFormatValid(value)) {
       try {

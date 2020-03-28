@@ -1,5 +1,12 @@
 {
   "name": "cep-hook",
+  "keywords": [
+    "react",
+    "cep",
+    "viacep.com.br",
+    "react-hooks",
+    "api"
+  ],
   "version": "1.0.5",
   "description": "CEP do Brasil do WebApi Viacep.com.br",
   "author": "Fulvio Cezar Canducci Dias",
