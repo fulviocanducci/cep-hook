@@ -7,7 +7,7 @@
     "react-hooks",
     "api"
   ],
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "CEP do Brasil do WebApi Viacep.com.br",
   "author": "Fulvio Cezar Canducci Dias",
   "license": "MIT",
